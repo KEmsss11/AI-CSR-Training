@@ -158,7 +158,7 @@ export function InterviewChat() {
       </div>
 
       {/* Chat Window */}
-      <div className="flex h-[550px] flex-col overflow-hidden rounded-2xl border border-base-300 bg-base-100 shadow-sm">
+     <div className="flex h-137.5 flex-col overflow-hidden rounded-2xl border border-base-300 bg-base-100 shadow-sm">
         <div className="flex items-center justify-between border-b border-base-300 px-5 py-4">
           <div>
             <h2 className="font-semibold">Interview Conversation</h2>

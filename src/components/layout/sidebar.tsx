@@ -1,6 +1,7 @@
 
 "use client";
-
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   MessageSquare,
@@ -14,14 +15,16 @@ import {
 } from "lucide-react";
 
 const navigation = [
-  { label: "Overview", href: "#overview", icon: LayoutDashboard },
-  { label: "AI Interview", href: "#interview", icon: MessageSquare },
+  { label: "Overview", href: "/", icon: LayoutDashboard },
+  { label: "AI Interview", href: "/interview", icon: MessageSquare },
   { label: "Customer Roleplay", href: "#roleplay", icon: Headphones },
   { label: "Practice History", href: "#history", icon: History },
   { label: "My Progress", href: "#progress", icon: ChartNoAxesCombined },
 ];
 
 export function Sidebar() {
+  const pathname = usePathname();
+
   return (
     <div className="drawer-side z-40">
       <label
@@ -50,18 +53,22 @@ export function Sidebar() {
           </p>
 
           <ul className="menu gap-1 p-0">
-            {navigation.map((item, index) => {
+            {navigation.map((item) => {
               const Icon = item.icon;
+
+              const isActive =
+                (item.href === "/" && pathname === "/") ||
+                (item.href === "/interview" && pathname === "/interview");
 
               return (
                 <li key={item.label}>
-                  <a
+                  <Link
                     href={item.href}
-                    className={index === 0 ? "active font-semibold" : ""}
-                  >
+                    className={isActive ? "active font-semibold" : ""}
+                    >
                     <Icon size={19} />
                     {item.label}
-                  </a>
+                </Link>
                 </li>
               );
             })}
@@ -95,13 +102,13 @@ export function Sidebar() {
               and clear communication.
             </p>
 
-            <a
-              href="#practice"
-              className="mt-3 flex items-center gap-1 text-xs font-bold text-primary"
-            >
-              Start learning
-              <ChevronRight size={14} />
-            </a>
+            <Link
+                href="/#practice"
+                className="mt-3 flex items-center gap-1 text-xs font-bold text-primary"
+                >
+                Start learning
+                <ChevronRight size={14} />
+            </Link>
           </div>
         </div>
       </aside>
