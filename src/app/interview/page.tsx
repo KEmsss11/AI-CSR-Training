@@ -1,14 +1,19 @@
 
+"use client";
+
+import { useState } from "react";
+
 import { Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
 import { InterviewChat } from "@/components/interview/interview-chat";
-
-export const metadata = {
-  title: "AI Interview Practice | CSR Coach AI",
-  description: "Practice BPO interviews with your local AI interviewer.",
-};
+import {
+  InterviewSetup,
+  type InterviewConfig,
+} from "@/components/interview/interview-setup";
 
 export default function InterviewPage() {
+  const [config, setConfig] = useState<InterviewConfig | null>(null);
+
   return (
     <div className="drawer lg:drawer-open min-h-screen bg-base-200">
       <input
@@ -21,7 +26,11 @@ export default function InterviewPage() {
         <Header />
 
         <main className="mx-auto w-full max-w-7xl flex-1 p-4 md:p-6 lg:p-8">
-          <InterviewChat />
+          {config === null ? (
+            <InterviewSetup onStart={setConfig} />
+          ) : (
+            <InterviewChat config={config} />
+          )}
         </main>
       </div>
 
